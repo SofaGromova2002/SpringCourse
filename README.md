@@ -1,1 +1,3 @@
-# JavaProgramming
+Домашка по лекции 2:
+
+Изучить параметры которые предоставляет аннотация @SpringBootApplication
