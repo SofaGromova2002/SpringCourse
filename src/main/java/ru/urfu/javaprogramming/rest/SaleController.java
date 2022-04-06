@@ -1,11 +1,14 @@
 package ru.urfu.javaprogramming.rest;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
-import ru.urfu.javaprogramming.model.SaleInfo;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ru.urfu.javaprogramming.model.SaleRequest;
+import ru.urfu.javaprogramming.model.SaleResponse;
 import ru.urfu.javaprogramming.rest.exceptions.BadGatewayException;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
@@ -15,17 +18,13 @@ public class SaleController {
 
     private final AtomicLong currentId = new AtomicLong(0);
 
-    @GetMapping("/headers")
-    public Map<String, String> getHeaders(@RequestHeader Map<String, String> headers) {
-        return headers;
-    }
-
     @PostMapping("/registerSale")
-    public SaleInfo registerSale(@RequestBody SaleInfo saleInfo) throws BadGatewayException {
-        if (saleInfo.getPrice() < 0) {
+    public SaleResponse registerSale(@RequestBody SaleRequest saleRequest) throws BadGatewayException {
+        if (saleRequest.getPrice() < 0) {
             throw new BadGatewayException("Цена продажи меньше 0");
         }
-        saleInfo.getInfo().setId(currentId.incrementAndGet());
-        return saleInfo;
+        SaleResponse saleResponse = new SaleResponse(saleRequest);
+        saleResponse.getInfo().setId(currentId.incrementAndGet());
+        return saleResponse;
     }
 }

@@ -9,18 +9,16 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SaleInfo {
+public class SaleRequest {
 
     private Double price;
 
-    private AdditionalSaleInfo info;
+    private AdditionalSaleInfoRequest info;
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class AdditionalSaleInfo {
-
-        private Long id;
+    public static class AdditionalSaleInfoRequest {
 
         private Date date;
     }
