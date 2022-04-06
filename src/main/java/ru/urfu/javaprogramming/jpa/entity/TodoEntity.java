@@ -1,10 +1,7 @@
 package ru.urfu.javaprogramming.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
@@ -15,21 +12,19 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class TodoEntity {
 
     @Id
-    @Column(name = "id")
     private UUID id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "timestamp")
     private ZonedDateTime timestamp;
 
     @ManyToOne

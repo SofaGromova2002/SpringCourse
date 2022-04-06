@@ -8,5 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface TodoListRepository extends JpaRepositoryImplementation<TodoListEntity, UUID> {
-
+    boolean existsByName(String name);
 }

@@ -1,9 +1,6 @@
 package ru.urfu.javaprogramming.jpa.entity;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,14 +14,13 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class TodoListEntity {
 
     @Id
-    @Column(name = "id")
     private UUID id;
 
-    @Column(name = "name")
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

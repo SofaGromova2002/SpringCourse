@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS todo_list
 (
     id    UUID PRIMARY KEY ,
-    name  text NOT NULL
+    name  text NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS todo
@@ -14,5 +14,8 @@ CREATE TABLE IF NOT EXISTS todo
 
     CONSTRAINT todo_foreign_key
     FOREIGN KEY(todo_list_id)
-    REFERENCES todo_list(id)
+    REFERENCES todo_list(id),
+
+    CONSTRAINT todo_name_list_id_unique
+    UNIQUE (name, todo_list_id)
 );
