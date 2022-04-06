@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.urfu.javaprogramming.events.AsyncEvent;
 import ru.urfu.javaprogramming.events.CommonEvent;
 import ru.urfu.javaprogramming.events.MyAbstractEvent;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class EventPublisher {
+
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public void publishCommonEvent() {
@@ -25,12 +27,15 @@ public class EventPublisher {
         this.publishEvent(new AsyncEvent(String.format("Асинхронное событие %s", UUID.randomUUID())));
     }
 
+    @Transactional
     public void publishTransactionalSuccessEvent() {
         this.publishEvent(new TransactionalEvent(String.format("Транзакционное безошибочное событие %s", UUID.randomUUID())));
     }
 
+    @Transactional
     public void publishTransactionalErrorEvent() {
-        this.publishEvent(new TransactionalEvent(String.format("Транзакционное ошибочное событие %s", UUID.randomUUID()), new RuntimeException("ERROR")));
+        this.publishEvent(new TransactionalEvent(String.format("Транзакционное ошибочное событие %s", UUID.randomUUID())));
+        throw new RuntimeException();
     }
 
     private void publishEvent(MyAbstractEvent event) {
