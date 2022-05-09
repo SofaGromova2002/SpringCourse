@@ -1,13 +1,13 @@
-package ru.urfu.javaprogramming;
+package ru.urfu.producer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JavaProgrammingApplication {
+public class ProducerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaProgrammingApplication.class, args);
+        SpringApplication.run(ProducerApplication.class, args);
     }
 
 }
