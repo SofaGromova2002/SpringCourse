@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.urfu.javaprogramming.SecurityUtils;
+import ru.urfu.javaprogramming.model.LoggedUserResponse;
 
 @Slf4j
 @RestController
@@ -11,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class SupportController {
 
     @GetMapping
-    public void supportGet() {
+    public LoggedUserResponse supportGet() {
         log.info("Запрос в апи support");
+        return SecurityUtils.getLoggedUserResponse();
     }
 }
